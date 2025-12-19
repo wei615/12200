@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>影音賞析 - 五言詩學習平台</title>
+    <style>
+        /* 引用 index.html 的古風樣式 */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: "Microsoft JhengHei", "PingFang TC", serif;
+        }
+
+        /* 背景圖設定 - 與首頁一致 */
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://i.pinimg.com/736x/3f/2b/11/3f2b116e84f13aa3dc0be4d83254af17.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+        }
+
+        /* 主容器 */
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5); /* 稍微加深背景遮罩，讓影片列表更清晰 */
+        }
+
+        /* 標題樣式 */
+        .title {
+            color: #fff;
+            font-size: 3rem;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.6), 2px 2px 4px rgba(0, 0, 0, 0.8);
+            margin-bottom: 40px;
+            letter-spacing: 10px;
+            font-weight: 700;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+            padding-bottom: 15px;
+            animation: titleEntry 1.5s ease-out;
+        }
+
+        @keyframes titleEntry {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 按鈕列表容器 */
+        .video-list {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            width: 100%;
+            max-width: 500px;
+            padding: 0 20px;
+        }
+
+        /* 影片連結按鈕樣式 */
+        .video-btn {
+            padding: 18px 30px;
+            font-size: 1.4rem;
+            color: #fff;
+            background: linear-gradient(to right, rgba(0,0,0,0.4), rgba(50,50,50,0.6), rgba(0,0,0,0.4));
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-btn:hover {
+            background: linear-gradient(to right, rgba(20,20,20,0.6), rgba(70,70,70,0.8), rgba(20,20,20,0.6));
+            transform: scale(1.03);
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.5);
+            border-color: rgba(212, 175, 55, 0.8);
+            letter-spacing: 2px;
+        }
+
+        /* 右下角回首頁按鈕 */
+        .home-btn-corner {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 10;
+            padding: 15px 40px;
+            font-size: 1.5rem;
+            color: #fff;
+            background: linear-gradient(to right, rgba(0,0,0,0.6), rgba(50,50,50,0.8), rgba(0,0,0,0.6));
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .home-btn-corner:hover {
+            background: linear-gradient(to right, rgba(20,20,20,0.8), rgba(70,70,70,0.9), rgba(20,20,20,0.8));
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.6);
+        }
+
+        /* 梅花飄落容器 */
+        #plum-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .plum {
+            position: absolute;
+            color: #ffb7c5;
+            user-select: none;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="background"></div>
+    <div id="plum-container"></div>
+
+    <div class="container">
+        <h1 class="title">詩境影音賞析</h1>
+        
+        <div class="video-list">
+            <!-- 五個影片按鈕，href 暫時設為 #，可替換為 YouTube 連結 -->
+            <a href="https://youtu.be/SdKwsiNEQSU?si=MRq1oYffDAIf7szj" target="_blank" class="video-btn">🎥 唐人才子王之渙</a>
+            <a href="https://youtu.be/g9OWii5xQ-0?si=_gm8ADUzaAqMy3z8" target="_blank" class="video-btn">🎥 永遠的少年"詩仙"李白</a>
+            <a href="https://youtu.be/J-sxbXYjzk0?si=muUNUSKU6omxgQUb" target="_blank" class="video-btn">🎥 "詩佛"王維的一生</a>
+            <a href="https://youtu.be/ZhcA5_bU_iA?si=Cb4NDSRLHMUc4lby" target="_blank" class="video-btn">🎥 山水田園詩人孟浩然</a>
+            <a href="https://youtu.be/S_0wwF-iFZI?si=nZ1jgXWC4pOxKkdj" target="_blank" class="video-btn">🎥 孤獨釣翁柳宗元</a>
+        </div>
+    </div>
+
+    <!-- 右下角回首頁按鈕 -->
+    <a href="index.html" class="home-btn-corner">回首頁</a>
+
+    <script>
+        // 複製 index.html 的梅花特效
+        function createPlum() {
+            const container = document.getElementById('plum-container');
+            const plum = document.createElement('div');
+            
+            const size = Math.random() * 15 + 10 + 'px';
+            const left = Math.random() * 100 + 'vw';
+            const duration = Math.random() * 5 + 5 + 's';
+            const delay = Math.random() * 5 + 's';
+            
+            plum.classList.add('plum');
+            plum.innerHTML = '🌸'; 
+            plum.style.fontSize = size;
+            plum.style.left = left;
+            plum.style.animationDuration = duration;
+            plum.style.animationDelay = delay;
+            plum.style.opacity = Math.random();
+
+            container.appendChild(plum);
+
+            setTimeout(() => {
+                plum.remove();
+            }, (parseFloat(duration) + parseFloat(delay)) * 1000);
+        }
+
+        setInterval(createPlum, 400); // 稍微減少頻率，避免干擾閱讀列表
+
+        for(let i=0; i<10; i++) {
+            createPlum();
+        }
+    </script>
+</body>
+</html>
